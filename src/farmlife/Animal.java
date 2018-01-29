@@ -4,23 +4,15 @@ package farmlife;
  * Animal Base Class
  * @author Rodrigo Rente Nº2385 (rodrigo.rente@estudantes.ips.pt)
  */
-public class Animal
+public abstract class Animal
 {
-    private int stamina;            // the amount of stamina it currently has
-    private boolean isSleeping;     // whether or not the animal is sleeping
+    protected int stamina;          // the amount of stamina it currently has
+    private boolean sleeping;       // whether or not the animal is sleeping
     private int staminaToRun;       // the amount of stamina used for running
     
-    public Animal()
+    public Animal(int stamina, int staminaToRun)
     {
-        stamina = 10000;
-        isSleeping = false;
-        
-        staminaToRun = 1000;
-    }
-    
-    public Animal(int staminaToRun)
-    {
-        stamina = 10000;
+        this.stamina = stamina;
         isSleeping = false;
         
         this.staminaToRun = staminaToRun;
@@ -29,6 +21,11 @@ public class Animal
     public void run()
     {
         stamina -= staminaToRun;
+    }
+
+    public boolean isAsleep()
+    {
+        return sleeping;
     }
     
     public void sleep()

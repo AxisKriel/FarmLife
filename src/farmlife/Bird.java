@@ -6,11 +6,19 @@
 package farmlife;
 
 /**
- *
- * @author rodri
+ * A Critter capable of flight.
+ * @author Rodrigo Rente Nº2385 (rodrigo.rente@estudantes.ips.pt)
  */
 public class Bird extends Critter
 {
+	private int staminaToFly;
+
+	public Bird()
+	{
+		super(20, 5);
+		staminaToFly = 2;
+	}
+
     public void fly()
     {
         

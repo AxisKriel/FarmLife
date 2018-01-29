@@ -6,8 +6,8 @@
 package farmlife;
 
 /**
- *
- * @author rodri
+ * The most common type of Critter that only runs and sleeps.
+ * @author Rodrigo Rente Nº2385 (rodrigo.rente@estudantes.ips.pt)
  */
 public class Mouse extends Critter
 {

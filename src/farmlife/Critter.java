@@ -13,14 +13,20 @@ public class Critter extends Animal
 {
     private boolean isAlive;
     
-    public Critter()
+    public Critter(int stamina, int staminaToRun)
     {
-        super();
+        super(stamina, staminaToRun);
         isAlive = true;
     }
     
     public void escape()
     {
-        
+        stamina += 5;
+    }
+
+    public int kill()
+    {
+    	isAlive = false;
+    	return stamina;
     }
 }

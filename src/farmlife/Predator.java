@@ -11,12 +11,23 @@ package farmlife;
  */
 public class Predator extends Animal
 {
-    private String name;
-    
-    public Predator(String name)
+    protected String name;
+    protected float captureRate;
+    protected float sleepCaptureRate;
+
+    public Predator(int stamina, int staminaToRun, String name, float captureRate)
     {
-        super();
-        this.name = name;
+    	super(stamina, staminaToRun);
+    	this.name = name;
+    	this.captureRate = captureRate;
+
+    	// If the target is sleeping, capture rate is a fixed 50% chance
+        sleepCaptureRate = 1/2;
+    }
+
+    public String getName()
+    {
+    	return name;
     }
     
     public boolean hunt(Critter target)
