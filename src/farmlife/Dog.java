@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package farmlife;
-import java.lang;
 
 /**
  * A high endurance Predator. Not very skilled, and may attack Cats on a whim.
@@ -12,26 +11,52 @@ import java.lang;
  */
 public class Dog extends Predator
 {
-	private int staminaToAttack;
+    /**
+     * The amount of stamina required to attack a cat
+     */
+    private int staminaToAttack;
 
+    /**
+     * Creates a new instance of the Dog class with the given name
+     * @param name The name for this Dog
+     */
     public Dog(String name)
     {
         super(10000, 50, name, 1/25);
         staminaToAttack = 100;
     }
     
+    /**
+     * Attacks a Cat.
+     * @param target 
+     */
     public void attackCat(Cat target)
     {
     	stamina -= staminaToAttack;
     	target.defend();
     }
 
+    /**
+     * Hunts target Critter.
+     * @param prey The Critter to hunt.
+     * @return True if the hunt succeeded; false if the prey escaped.
+     */
     @Override
     public boolean hunt(Critter prey)
     {
+        // Logic for sleeping preys is simplified
     	if (prey.isAsleep())
     	{
-    		return Math.random() < sleepCaptureRate;
+            if (test(sleepCaptureRate))
+            {
+                stamina += prey.kill();
+                return true;
+            }
+            else
+            {
+                prey.escape();
+                return false;
+            }
     	}
 
     	// Pursuit the target
@@ -39,14 +64,14 @@ public class Dog extends Predator
     	if (prey instanceof Bird)
     	{
     		// A dog will never catch a flying bird
-    		prey.fly();
+                ((Bird)prey).fly();
     		return false;
     	}
     	else
     	{
     		// The prey attempts to escape the predator
     		prey.run();
-    		if (Math.random() < captureRate)
+    		if (test(captureRate))
     		{
     			// The prey is killed and the dog obtains its stamina
     			stamina += prey.kill();

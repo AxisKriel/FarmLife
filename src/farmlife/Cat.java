@@ -11,8 +11,14 @@ package farmlife;
  */
 public class Cat extends Predator
 {
-	private float birdCaptureRate;
-	private int staminaToDefend;
+    /**
+     * The probability, between 0 and 1, to hunt down a Bird
+     */
+    private float birdCaptureRate;
+    /**
+     * The amount of stamina used for defending against a Dog attack
+     */
+    private int staminaToDefend;
 
     public Cat(String name)
     {
@@ -21,13 +27,50 @@ public class Cat extends Predator
         staminaToDefend = 25;
     }
 
+    /**
+     * The cat fends off an incoming Dog attack, spending some stamina
+     */
     public void defend()
     {
     	stamina -= staminaToDefend;
     }
     
-    public boolean huntBird(Bird target)
+    @Override
+    public boolean hunt(Critter prey)
     {
+        // Logic for sleeping preys is simplified
+    	if (prey.isAsleep())
+    	{
+            if (test(sleepCaptureRate))
+            {
+                stamina += prey.kill();
+                return true;
+            }
+            else
+            {
+                prey.escape();
+                return false;
+            }
+        }
         
+        // Pursuit the target
+        run();
+        
+        float testStatistic = prey instanceof Mouse ? 1/5 : 1/10;
+        
+        // The prey attempts to escape the predator
+        prey.run();
+        if (Math.random() < captureRate)
+        {
+            // The prey is killed and the dog obtains its stamina
+            stamina += prey.kill();
+            return true;
+        }
+        else
+        {
+            // The prey escaped and recovers some stamina
+            prey.escape();
+            return false;
+        }
     }
 }
