@@ -11,6 +11,10 @@ public abstract class Animal
      */
     protected int stamina;
     /**
+     * The maximum amount of stamina the Animal may have
+     */
+    protected int staminaMax;
+    /**
      * Whether or not the Animal is sleeping
      */
     private boolean sleeping;
@@ -27,6 +31,7 @@ public abstract class Animal
     public Animal(int stamina, int staminaToRun)
     {
         this.stamina = stamina;
+        staminaMax = stamina;   // the stamina cap is set to the starting value
         sleeping = false;
         
         this.staminaToRun = staminaToRun;
@@ -38,6 +43,28 @@ public abstract class Animal
     public void run()
     {
         stamina -= staminaToRun;
+    }
+
+    /**
+     * Gets the animal's current stamina
+     */
+    public int getStamina()
+    {
+        return stamina;
+    }
+
+    public int getStaminaMax()
+    {
+        return staminaMax;
+    }
+
+    /**
+     * Gets a fraction, between 0 and 1, of the current stamina
+     * @return A float representing the fraction of stamina the Animal has
+     */
+    public float getStaminaPercent()
+    {
+        return stamina / staminaMax;
     }
 
     /**

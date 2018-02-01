@@ -9,7 +9,7 @@ public abstract class Predator extends Animal
     /**
      * The name of this predator instance
      */
-    protected String name;
+    private String name;
     /**
      * The probability, between 0 and 1, to capture a basic Critter, like a Mouse
      */

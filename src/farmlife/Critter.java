@@ -11,12 +11,15 @@ package farmlife;
  */
 public class Critter extends Animal
 {
-    private boolean isAlive;
+    /**
+     * Whether or not this Critter is alive
+     */
+    private boolean alive;
     
     public Critter(int stamina, int staminaToRun)
     {
         super(stamina, staminaToRun);
-        isAlive = true;
+        alive = true;
     }
     
     public void escape()
@@ -24,9 +27,14 @@ public class Critter extends Animal
         stamina += 5;
     }
 
+    public boolean isAlive()
+    {
+        return alive;
+    }
+
     public int kill()
     {
-    	isAlive = false;
+    	alive = false;
     	return stamina;
     }
 }

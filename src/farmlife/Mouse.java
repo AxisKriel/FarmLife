@@ -11,5 +11,8 @@ package farmlife;
  */
 public class Mouse extends Critter
 {
-    
+    public Mouse()
+    {
+        super(50, 2);
+    }
 }
